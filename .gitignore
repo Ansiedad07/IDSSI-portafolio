@@ -1,13 +1,38 @@
-# Ignorar ejecutables de GCC
+# ============================
+# Archivos de compilación C/C++
+# ============================
 *.exe
-
-# Archivos de backup de C
+*.out
 *.o
 *.obj
+*.a
+*.lib
+*.dll
 
-# Archivos temporales del sistema
+# Carpetas de compilación
+build/
+bin/
+Debug/
+Release/
+
+# ============================
+# Archivos temporales
+# ============================
 *.log
 *.tmp
+*.swp
+*.swo
+*.DS_Store
+*.vscode/
 
-# Carpeta de compilación (si existe)
-build/
+# ============================
+# Archivos de Python
+# ============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
