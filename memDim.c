@@ -1,5 +1,7 @@
 /**
  * Memória Dinâmica
+ * La memoria dinamica es cuando se reserva en tiempo de ejecucion y la memoria estatica es cuando se reserva en tiempo de compilacion
+ * malloc() es una función que se utiliza para asignar memoria dinámica en C.
  */
 #include <stdio.h>
 #include <stdlib.h>
