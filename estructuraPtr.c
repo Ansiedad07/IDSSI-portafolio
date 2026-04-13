@@ -66,4 +66,13 @@ void mostrarDatos(struct Punto *ptr, int n) {
     for(int i = 0; i < n; i++) {
         printf("Punto %d: (%d, %d)\n", i, ptr[i].x, ptr[i].y);
     }
+
+	for(int i = 0; i < n - 1; i++) {
+		for(int j = i + 1; j < n; j++) {
+			double dx = ptr[j].x - ptr[i].x;
+			double dy = ptr[j].y - ptr[i].y;
+			double distancia = sqrt((dx * dx) + (dy * dy));
+			printf("La distancia entre el punto %d y el punto %d es: %.2f\n", i, j, distancia);
+		}
+	}
 }
