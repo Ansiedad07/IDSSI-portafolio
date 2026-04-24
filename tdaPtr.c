@@ -107,11 +107,11 @@ void liberarDato(struct Dato **ptr){
 			*ptr = NULL; // Se asigna NULL al apuntador principal para indicar que la lista enlazada está vacía
 		} else {
 			ptrAux = *ptr; // Se asigna el valor del apuntador principal al apuntador auxiliar para recorrer la lista enlazada
-			while(ptrAux->ptrSig != NULL){ // Se recorre la lista enlazada hasta llegar al último nodo, el cual apunta a NULL
-				ptrAux = ptrAux->ptrSig; // Se actualiza el apuntador auxiliar para que apunte al siguiente nodo, hasta llegar al último nodo de la lista enlazada
+			while(ptrAux->ptrSig->ptrSig != NULL){ // Se recorre la lista enlazada hasta llegar al penúltimo nodo, el cual apunta a un nodo que a su vez apunta a NULL
+				ptrAux = ptrAux->ptrSig; // Se actualiza el apuntador auxiliar para que apunte al siguiente nodo, hasta llegar al penúltimo nodo de la lista enlazada
 			}
-			free(ptrAux); // Se libera la memoria del último nodo de la lista enlazada
-			*ptr = NULL;
+			free(ptrAux->ptrSig); // Se libera la memoria del último nodo de la lista enlazada
+			ptrAux->ptrSig = NULL; // Se asigna NULL al apuntador del penúltimo nodo para indicar que es el último nodo de la lista
 		}
 	}
 }
