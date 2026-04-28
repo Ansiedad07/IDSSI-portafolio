@@ -63,11 +63,12 @@ int main (void){
 
 				ptrAux = ptr;
 				while(ptrAux != NULL){
-					temp = ptrAux;
-					ptrAux = ptrAux->ptrSig;
-					free(temp);
+					temp = ptrAux; // Gurdo el nodo actual
+					ptrAux = ptrAux->ptrSig; // Avanzo al siguiente
+					free(temp); // Libero el anterior
 				}
-				ptr = NULL;
+				ptr = NULL; // La lista queda vacia
+				printf("Se liberaron todos los nodos");
 				break;
 			default:
 				printf("Opcion invalida\n");
