@@ -27,7 +27,7 @@ void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
 
 int main (void){
-	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL;
+	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL, *temp = NULL;
 	int opcion;
 
 	do{
@@ -57,7 +57,17 @@ int main (void){
 				liberarDato(&ptr);
 				break;
 			case 4:
-				// Salir
+				if(ptr == NULL){
+					printf("No hay memoria para liberar");
+				}
+
+				ptrAux = ptr;
+				while(ptrAux != NULL){
+					temp = ptrAux;
+					ptrAux = ptrAux->ptrSig;
+					free(temp);
+				}
+				ptr = NULL;
 				break;
 			default:
 				printf("Opcion invalida\n");
@@ -91,10 +101,9 @@ struct Dato * crearDato(void){
 }
 
 void mostrarDato(struct Dato *ptr){
-	// Mostrar dato
 	while(ptr != NULL){
 		printf("%d\n", ptr->d); // Se muestra el valor del dato actual
-		ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista enlazada, hasta llegar a NULL
+		ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista
 	}
 }
 
