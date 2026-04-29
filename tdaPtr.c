@@ -13,7 +13,7 @@ struct Dato{
 
 int menu(void){
 	int opcion;
-	printf("1.- Crear dato\n");
+	printf("\n1.- Crear dato\n");
 	printf("2.- Mostrar dato\n");
 	printf("3.- Liberar dato\n");
 	printf("4.- Salir\n");
@@ -69,6 +69,8 @@ int main (void){
 				}
 				ptr = NULL; // La lista queda vacia
 				printf("Se liberaron todos los nodos");
+
+
 				break;
 			default:
 				printf("Opcion invalida\n");
@@ -102,9 +104,13 @@ struct Dato * crearDato(void){
 }
 
 void mostrarDato(struct Dato *ptr){
-	while(ptr != NULL){
-		printf("%d\n", ptr->d); // Se muestra el valor del dato actual
-		ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista
+	if(ptr == NULL){
+		printf("\nNo hay datos para mostrar\n");
+	} else {
+		while(ptr != NULL){
+			printf("%d -> ", ptr->d); // Se muestra el valor del dato actual
+			ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista
+	}
 	}
 }
 
@@ -115,7 +121,7 @@ void mostrarDato(struct Dato *ptr){
 void liberarDato(struct Dato **ptr){
 	struct Dato *ptrAux; // Se crea un apuntador auxiliar para recorrer la lista enlazada
 	if(*ptr == NULL){
-		printf("No hay datos para liberar.\n");
+		printf("\nNo hay datos para liberar.\n");
 	} else {
 		if((*ptr)->ptrSig == NULL){ // Si el nodo inicial de la lista enlazada no apunta a ningún otro nodo, es decir, si es el único nodo de la lista
 			free(*ptr); // Se libera la memoria del nodo inicial de la lista enlazada
