@@ -14,18 +14,21 @@ struct Dato{
 int menu(void){
 	int opcion;
 	printf("\n1.- Crear dato\n");
-	printf("2.- Submenu\n");
-	printf("3.- Salir\n");
-	printf("Ingrese una opcion: ");
+	printf("2.- Funciones\n");
+	printf("3.- Mostrar dato\n");
+	printf("4.- Liberar nodo\n");
+	printf("5.- Salir\n");
 	scanf("%d", &opcion);
 	return opcion;
 }
 
 int submenu(void){
 	int opcion;
-	printf("\n1.- Mostrar datos\n");
-	printf("2.- Liberar dato\n");
-	printf("3.- Regresar\n");
+	printf("\n1.- Buscar\n");
+	printf("2.- Contar\n");
+	printf("3.- Remplazar\n");
+	printf("4.- Ordenar");
+	printf("5.- Salir");
 	scanf("%d", &opcion);
 	return opcion;
 }
@@ -33,6 +36,7 @@ int submenu(void){
 struct Dato* crearDato(void);
 void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
+void contar(struct Dato *ptr);
 
 int main (void){
 	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL, *temp = NULL;
@@ -61,24 +65,33 @@ int main (void){
 			case 2:
 				do{
 					op2 = submenu();
-					switch(op2){
-						case 1:
-							mostrarDato(ptr);
-							break;
-						case 2:
-							liberarDato(&ptr);
-							break;
-						case 3:
-							printf("Regresando\n");
-							break;
-						default:
-							printf("Opcion invalida\n");
+					switch (op2)
+					{
+					case 1:
+						printf("Buscar");
+						//buscar(ptr);
+						break;
+					case 2:
+						printf("Contar");
+						contar(ptr);
+						break;
+					case 3:
+						printf("Regresando");
+						break;
+					default:
+						printf("Opción incorrecta");
 					}
-				} while(op2 != 3);
+				} while(op2 != 5);
 				break;
 			case 3:
+				mostrarDato(ptr);
+				break;
+			case 4:
+				liberarDato(&ptr);
+				break;
+			case 5:
 				if(ptr == NULL){
-					printf("No hay memoria para liberar");
+					printf("\nNo hay memoria para liberar");
 				}
 
 				ptrAux = ptr;
@@ -88,12 +101,14 @@ int main (void){
 					free(temp); // Libero el anterior
 				}
 				ptr = NULL; // La lista queda vacia
-				printf("Se liberaron todos los nodos");
+				printf("\nSe liberaron todos los nodos");
+
+
 				break;
 			default:
 				printf("Opcion invalida\n");
 		}
-	} while(opcion != 3);
+	} while(opcion != 5);
 
 }
 /**
@@ -144,7 +159,6 @@ void liberarDato(struct Dato **ptr){
 		if((*ptr)->ptrSig == NULL){ // Si el nodo inicial de la lista enlazada no apunta a ningún otro nodo, es decir, si es el único nodo de la lista
 			free(*ptr); // Se libera la memoria del nodo inicial de la lista enlazada
 			*ptr = NULL; // Se asigna NULL al apuntador principal para indicar que la lista enlazada está vacía
-			printf("Se libero el nodo");
 		} else {
 			ptrAux = *ptr; // Se asigna el valor del apuntador principal al apuntador auxiliar para recorrer la lista enlazada
 			while(ptrAux->ptrSig->ptrSig != NULL){ // Se recorre la lista enlazada hasta llegar al penúltimo nodo, el cual apunta a un nodo que a su vez apunta a NULL
@@ -152,9 +166,17 @@ void liberarDato(struct Dato **ptr){
 			}
 			free(ptrAux->ptrSig); // Se libera la memoria del último nodo de la lista enlazada
 			ptrAux->ptrSig = NULL; // Se asigna NULL al apuntador del penúltimo nodo para indicar que es el último nodo de la lista
-			printf("Se libero el último nodo");
 		}
 	}
+}
+
+void contar(struct Dato *ptr){
+	int cont = 0;
+	while(ptr != NULL){
+		ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista
+		cont++; // Se incrementa el contador por cada nodo de la lista enlazada
+	}
+	printf("\nEl número de nodos es: %d\n", cont); // Se muestra el número total de nodos en la lista enlazada
 }
 
 /**
